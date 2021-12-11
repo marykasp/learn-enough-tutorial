@@ -27,3 +27,57 @@ def functional_urls(states)
 end
 
 p functional_urls(states)
+
+# singles - imperative version
+def imperative_singles(states)
+  singles = []
+  states.each do |state|
+    if state.split.length == 1
+      singles << state
+    end
+  end
+  singles
+end
+
+p imperative_singles(states)
+# puts imperative_singles(states).inspect
+
+# singles - functional version
+def functional_singles(states)
+  states.select { |state| state.split.length == 1}
+end
+
+p functional_singles(states)
+
+# create a hash where the state name is the key and its string length is the value
+def imperative_length(states)
+  lengths = {}
+  states.each do |state|
+    lengths[state] = state.length
+  end
+  lengths
+end
+
+p imperative_length(states)
+
+# hash creation - functional reduce
+def functional_length(states)
+  states.reduce({}) do |lengths, state|
+    lengths[state] = state.length
+    lengths
+  end
+end
+
+p functional_length(states)
+
+# inject method is same as reduce but more commonnly used when accumulating into an object while reduce is used when reducing down to one value
+def create_lengths(states)
+  states.inject({}) do |lengths, state|
+    lengths[state] = state.length
+    lengths
+  end
+end
+
+p create_lengths(states)
+
+
